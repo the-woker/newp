@@ -87,6 +87,11 @@ int main(int argc, char *argv[]) {
 
   std::cout << "Reinitializing git repository..." << std::endl;
 
+  fs::remove_all(".git");
+  fs::remove_all("result");
+  fs::remove_all("flake.lock");
+  fs::remove_all("src/main.cpp");
+
   fs::path filename{"src/main.cpp"};
 
   std::ofstream outFile(filename, std::ios::trunc);
@@ -103,16 +108,9 @@ int main(int argc, char *argv[]) {
   }
   )";
 
-  fs::remove_all(".git");
-  fs::remove_all("result");
-  fs::remove_all("flake.lock");
-  fs::remove_all("src/main.cpp");
-
   if (runCommand("git init") != 0)
     return 1;
   if (runCommand("git add .") != 0)
-    return 1;
-  if (runCommand("git commit -m \"Initial commit\"") != 0)
     return 1;
 
   std::cout << "\nProject \"" << projectName << "\" created successfully!"
