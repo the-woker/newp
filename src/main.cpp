@@ -87,6 +87,22 @@ int main(int argc, char *argv[]) {
 
   std::cout << "Reinitializing git repository..." << std::endl;
 
+  fs::path filename{"src/main.cpp"};
+
+  std::ofstream outFile(filename, std::ios::trunc);
+  if (!outFile) {
+    std::cerr << "Error opening file for writing: " << filename << std::endl;
+    exit(1);
+  }
+
+  outFile << R"(#include <iostream>
+
+  int main(){
+	std::cout << "Hello, World!\n";
+	return 0;
+  }
+  )";
+
   fs::remove_all(".git");
   fs::remove_all("result");
   fs::remove_all("flake.lock");
