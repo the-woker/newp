@@ -1,9 +1,8 @@
-result/
-result
-.direnv
+/result
+/result-*
 .direnv/
-.cache/
-.cache
+.envrc
+/build/
+/.cache/
 /.clangd
-/build
-/.direnv/bin
+/compile_commands.json
