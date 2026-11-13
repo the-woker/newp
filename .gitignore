@@ -1,6 +1,9 @@
 result/
 result
 .direnv
-/.direnv/bin
+.direnv/
 .cache/
 .cache
+/.clangd
+/build
+/.direnv/bin
