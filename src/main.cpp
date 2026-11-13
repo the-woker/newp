@@ -68,9 +68,8 @@ int main(int argc, char *argv[]) {
 
   std::cout << "Cloning template repository..." << std::endl;
 
-  int cloneResult =
-      runCommand("git clone --depth 1 "
-                 "https://codeberg.org/woker/nix-cpp-template.git .");
+  int cloneResult = runCommand("git clone --depth 1 "
+                               "git@github.com:the-woker/newp .");
 
   if (cloneResult != 0) {
     return 1;
