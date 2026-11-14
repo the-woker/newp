@@ -9,9 +9,10 @@
   }: let
     system = "x86_64-linux";
     pkgs = import nixpkgs {inherit system;};
-    cross = pkgs.pkgsCross.mingwW64;
+
+    moldStdenv = pkgs.stdenvAdapters.useMoldLinker pkgs.stdenv;
   in {
-    packages.${system}.default = pkgs.stdenv.mkDerivation {
+    packages.${system}.default = moldStdenv.mkDerivation {
       pname = "newp";
       version = "1.0";
       src = pkgs.lib.fileset.toSource {
@@ -30,11 +31,10 @@
       ];
     };
 
-    devShells.${system}.default = pkgs.mkShell {
+    devShells.${system}.default = pkgs.mkShell.override {stdenv = moldStdenv;} {
       packages = with pkgs; [
         clang-tools
         cmake
-        gcc
       ];
 
       shellHook = ''
